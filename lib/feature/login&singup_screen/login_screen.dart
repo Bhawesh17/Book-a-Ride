@@ -41,8 +41,9 @@ class _LoginScreenState extends State<LoginScreen>
       //Navigator.pop(context);
       // ScaffoldMessenger.of(context)
       //     .showSnackBar(SnackBar(content: Text("Login Successfully")));
-Utils().toastmessage("Done");
-
+Utils().toastmessage("Loged In Successfully");
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => HomeScreen()));
      } catch (e) {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => HomeScreen()));

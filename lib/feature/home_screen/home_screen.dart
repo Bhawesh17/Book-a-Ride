@@ -19,15 +19,12 @@ class _HomeScreenState extends State<HomeScreen> {
   List<String> imgData = [];
   var data = FirebaseDatabase.instance.ref("Table");
 
-  work( img1,img2,img3,img4){
-        imgData.add(img1);
-        imgData.add(img2);
-        imgData.add(img3);
-        imgData.add(img4);
+  work(img1, img2, img3, img4) {
+    imgData.add(img1);
+    imgData.add(img2);
+    imgData.add(img3);
+    imgData.add(img4);
   }
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +32,14 @@ class _HomeScreenState extends State<HomeScreen> {
     width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.indigo,
-          leading: Icon(Icons.sort, color: Colors.white,),
+      appBar: AppBar(
+        backgroundColor: Colors.indigo,
+        leading: Icon(
+          Icons.sort,
+          color: Colors.white,
+          size: 40,
         ),
+      ),
       body: SafeArea(
           child: Container(
         height: height,
@@ -54,13 +55,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: EdgeInsets.only(top: 10),
                 child: Center(
                     child: Text(
-                      'Book A Ride',
-                      style: TextStyle(
-                          fontFamily: "Shizuru",
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    )),
+                  'Book A Ride',
+                  style: TextStyle(
+                      fontFamily: "Shizuru",
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                )),
               ),
             ),
             Container(
@@ -86,7 +87,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   //     }
                   // ),
                   child: StreamBuilder(
-
                       stream: data.onValue,
                       builder: (context, snapshot) {
                         if (!snapshot.hasData) {
@@ -112,14 +112,26 @@ class _HomeScreenState extends State<HomeScreen> {
                           itemBuilder: (BuildContext context, int index) {
                             String imageShow = liveData[index]["Images"];
                             return InkWell(
-                              onTap: () async{
-                                await work(liveData[index]["Images"], liveData[index]["Images1"], liveData[index]["Images2"], liveData[index]["Images3"]);
+                              onTap: () async {
+                                await work(
+                                    liveData[index]["Images"],
+                                    liveData[index]["Images1"],
+                                    liveData[index]["Images2"],
+                                    liveData[index]["Images3"]);
 
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => VehicleDetialeScreen(name: liveData[index]["Name"], avability: liveData[index]["Ready"], imgList: imgData, contact: liveData[index]["Cont"], ) ));
-
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            VehicleDetialeScreen(
+                                              name: liveData[index]["Name"],
+                                              avability: liveData[index]
+                                                  ["Ready"],
+                                              imgList: imgData,
+                                              contact: liveData[index]["Cont"],
+                                            )));
                               },
                               child: Container(
-
                                 margin: EdgeInsets.symmetric(
                                     vertical: 8, horizontal: 20),
                                 decoration: BoxDecoration(
@@ -132,39 +144,40 @@ class _HomeScreenState extends State<HomeScreen> {
                                         blurRadius: 6,
                                       ),
                                     ]),
-                                 child: Column(
-                                   children: [
-                                     Expanded(
-                                       child: Container(
-
-                                         child: Image.network(imageShow),
-                                       ),
-                                     ),
-                                     Row(
-                                       mainAxisAlignment: MainAxisAlignment.center,
-                                       children: [
-                                         Text("Driver Name : "),
-                                         Text(liveData[index]["Name"]),
-                                       ],
-                                     ),Row(
-                                       mainAxisAlignment: MainAxisAlignment.center,
-                                       children: [
-                                         Text("Avability : "),
-                                         Text(liveData[index]["Ready"]),
-                                       ],
-                                     ),
+                                child: Column(
+                                  children: [
+                                    Expanded(
+                                      child: Container(
+                                        child: Image.network(imageShow),
+                                      ),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text("Driver Name : "),
+                                        Text(liveData[index]["Name"]),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text("Avability : "),
+                                        Text(liveData[index]["Ready"]),
+                                      ],
+                                    ),
                                     Container(
                                       padding: EdgeInsets.all(10),
                                       height: 10,
                                       width: width,
                                       decoration: BoxDecoration(
-                                     //   color: liveData[index]["Ready"]  ? Colors.green : Colors.red,
+                                        //   color: liveData[index]["Ready"]  ? Colors.green : Colors.red,
                                         borderRadius: BorderRadius.circular(50),
                                       ),
                                     ),
-
-                                   ],
-                                 ),
+                                  ],
+                                ),
                               ),
                             );
                           },

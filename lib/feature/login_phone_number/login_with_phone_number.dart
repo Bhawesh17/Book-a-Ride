@@ -65,7 +65,7 @@ class _LoginWithPhoneNumberState extends State<LoginWithPhoneNumber> {
                 loading = true;
               });
               auth.verifyPhoneNumber(
-                phoneNumber: phoneNumberController.text,
+                phoneNumber: "+91"+phoneNumberController.text,
                   verificationCompleted: (_){
                     setState(() {
                       loading = false;
@@ -75,6 +75,9 @@ class _LoginWithPhoneNumberState extends State<LoginWithPhoneNumber> {
                     setState(() {
                       loading = false;
                     });
+                    print("here 1");
+
+                    print(e.toString());
                   Utils().toastmessage(e.toString());
                   },
                   codeSent: (String verificationId, int? token){
@@ -87,6 +90,8 @@ class _LoginWithPhoneNumberState extends State<LoginWithPhoneNumber> {
                     setState(() {
                       loading = false;
                     });
+                    print("here 2");
+                    print( e.toString());
                     Utils().toastmessage(e.toString());
                   },
               );
